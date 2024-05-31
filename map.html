@@ -1,1 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Custom Styled Google Map</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCj7uokA7CP61Bqj8ZFkHTnPybE7ty7qkk"></script>
+    <script>
+        function initMap() {
+            fetch('https://raw.githubusercontent.com/amolood/Uber-map-style/master/uber_style.json')
+                .then(response => response.json())
+                .then(styles => {
+                    var mapOptions = {
+                        center: {lat: -34.0522, lng: 23.3700}, // Coordinates for Plettenberg Bay
+                        zoom: 18, // Increased zoom level for street view
+                        styles: styles
+                    };
+                    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+                })
+                .catch(error => console.error('Error loading the map styles:', error));
+        }
+    </script>
+    <style>
+        #map {
+            width: 390px; /* Width of iPhone 15 screen */
+            height: 844px; /* Height of iPhone 15 screen */
+        }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body onload="initMap()">
+    <div id="map"></div>
+</body>
+</html>
 
